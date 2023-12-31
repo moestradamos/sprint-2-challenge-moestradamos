@@ -6,23 +6,83 @@
   <script id="challenge">
     // 👉 CHALLENGE 1
     function profileActivation(profile, reason) {
+      if (profile.active) {
+        if (reason) {
+          profile.active = false;
+          profile.reason = reason;
+        } else {
+          return "confirm status manually";
+        }
+      } else {
+        profile.active = true;
+        delete profile.reason;
+      }
+      return profile;
 
     }
 
     // 👉 CHALLENGE 2
     function mineSweeper(grid, x, y) {
+      if ( x < 1 || x > 3 || y < 1 || y > 3) {
+        return "invalid coordinates";
+      }
+
+      let selectedSquare = grid[y - 1][x - 1];
+      if (selectedSquare === "🟥") {
+        return "🟥 💀";
+      }
+      else if (selectedSquare === "🟦") {
+        return "🟦 🥳";
+      }
 
     }
 
     // 👉 CHALLENGE 3
     function booleanize(obj) {
 
+      for (let idx in obj) {
+        
+        if (idx.length > 9) {
+          return "shorten all prop names to 9 chars or less";
+        }
+
+        if (obj[idx] === 0) {
+          obj[idx] = false;
+        } else if (obj[idx] === 1) {
+          obj[idx] = true;
+        }if (obj[idx] === null) {
+          delete obj[idx];
+        }
+      }
+      
+      return obj;
     }
 
     // 👉 CHALLENGE 4
     function scrub(text, forbidden) {
+      if (text.length === 0 || forbidden.length === 0) {
+        return text;
+      }
 
+      const words = text.split(' ');
+      let modifiedWords = [];
+
+      for (let idx in words) {
+        let word = words[idx];
+
+        if (forbidden.includes(word)) {
+          let modifiedWord = word.replace(/./g, 'x');
+          modifiedWords.push(modifiedWord);
+        } else {
+          modifiedWords.push(word);
+        }
+      }
+
+      let modifiedText = modifiedWords.join(' ');
+      return modifiedText;
     }
+
+
 
     // 👉 CHALLENGE 5 (bonus, NOT graded)
     function normalizePhoneNumber(num) {
