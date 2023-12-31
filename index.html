@@ -86,12 +86,43 @@
 
     // 👉 CHALLENGE 5 (bonus, NOT graded)
     function normalizePhoneNumber(num) {
+      let formattedNumber = "";
+
+      for (let i = 0; i < num.length; i++) {
+        let digit = num[i];
+        if (/[0-9]/.test(digit)) {
+          formattedNumber += digit;
+        }
+      }
+
+      formattedNumber = "(" + formattedNumber.slice(0, 3) + ")" + formattedNumber .slice(3, 6) + "-" + formattedNumber.slice(6);
+
+      return formattedNumber
 
     }
 
     // 👉 CHALLENGE 6 (bonus, NOT graded)
     function diceRolls() {
+      let throws = 0;
+      let counter = 0;
 
+      while (true) {
+        let roll = Math.floor(Math.random() * 6) + 1;
+
+        if (roll === 6) {
+          counter++;
+        } else {
+          counter = 0;
+        }
+
+        throws++;
+
+        if (counter === 3) {
+          break;
+        }
+      }
+
+      return throws;
     }
 
     // 🧪 DO NOT make any changes below this line ===================
